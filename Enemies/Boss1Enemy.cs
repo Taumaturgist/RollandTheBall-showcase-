@@ -35,7 +35,7 @@ public class Boss1Enemy : Enemy
     }
     public override void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Environment")) enemyAudio.PlayOneShot(impact); //не звенят при контакте с полом
+        if (!collision.gameObject.CompareTag("Environment")) enemyAudio.PlayOneShot(impact); //don't cling when contact floor
 
         if (collision.gameObject.CompareTag("Player"))
         {

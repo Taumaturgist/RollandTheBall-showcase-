@@ -9,23 +9,22 @@ using UnityEngine.SceneManagement;
 
 public class DebugManager : MonoBehaviour
 {
-    //тест скорости перемещения игрока
     [Header("Set in Scene 0")]    
     public TMP_InputField cheatInputField;    
 
     [Header("Set in Scene 1")]
-    public float speed = 8f; //скорость игрока
-    public TextMeshProUGUI timerText; //вывод времени в игре
+    public float speed = 8f; //player speed
+    public TextMeshProUGUI timerText; //in-game timer
 
-    //кнопки скорости игрока todo - перенести в Player Controller
+    //todo - transfer to Player Controller
     private Button x4;
     private Button x8;
     private Button x16;
 
-    //поле для хранения значения чита
+    //cheat store field
     private string cheatString;
 
-    //считаем время, проведенное на уровне до победы/поражения/выхода. в период паузы таймер на стоп.
+    //count in-game timer. timer is stopped when game is paused
     private int levelNumber;
     private int inLevelTimerInt;
     private string inLevelTimerString;
@@ -43,8 +42,6 @@ public class DebugManager : MonoBehaviour
     }
     private void Start()
     {
-        //if (SceneManager.GetActiveScene().buildIndex == 0) ShowStatistics();
-
        if (SceneManager.GetActiveScene().buildIndex == 1)
        {
             gameManager = GameObject.Find("Main Camera").GetComponent<GameManager>();
@@ -100,7 +97,7 @@ public class DebugManager : MonoBehaviour
         inLevelTimerString = Mathf.Ceil(inLevelTimerInt / 60).ToString("00") + " : " + (inLevelTimerInt % 60).ToString("00");
         timerText.text = inLevelTimerString;
     }
-    //вызывается по любой из кнопке выхода с уровня (победа, поражение, пауза). должен передавать строку на сервер.
+    //called on any level quit button press (victory, defeat, interrupt). should send string to statistics server
     public void MakeStatSnapShot()
     {
         string statTimeNow = DateTime.UtcNow.ToString();
@@ -116,13 +113,13 @@ public class DebugManager : MonoBehaviour
              "; Stars earned: " + statStarsAmount + ";");
     }
     
-    //ЧИТЫ
+    //CHEATS
     public void ConfirmCheat()
     {
         cheatString = cheatInputField.text;
         CheckCheatInput();
     }
-    void CheckCheatInput()
+    void CheckCheatInput() //TODO - switch
     {
         
         if (cheatString == "1987")

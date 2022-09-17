@@ -16,11 +16,7 @@ public class Enemy : MonoBehaviour
     public SpawnManager spawnManager;
     public PlayerController playerController;
     public AudioSource enemyAudio;
-    
-    
-
-    
-    // Start is called before the first frame update
+  
     protected virtual void Awake()
     {
         enemyRb = GetComponent<Rigidbody>();
@@ -38,9 +34,8 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("Collision detected!");
 
-        if (!collision.gameObject.CompareTag("Environment")) enemyAudio.PlayOneShot(impact); //не звенят при контакте с полом
+        if (!collision.gameObject.CompareTag("Environment")) enemyAudio.PlayOneShot(impact); //don't cling when contact floor
 
 
         if (collision.gameObject.CompareTag("Player") && playerController.hasPowerUp)
@@ -52,7 +47,6 @@ public class Enemy : MonoBehaviour
     }
     public virtual void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Trigger detected!");
 
         if (other.gameObject.CompareTag("PowerUpSplash") && playerController.hasPowerUp)
         {

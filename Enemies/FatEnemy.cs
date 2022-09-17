@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class FatEnemy : Enemy
 {
-    private void Start()
-    {
-        speed = 20f;
-    }
+   
     
     
 }

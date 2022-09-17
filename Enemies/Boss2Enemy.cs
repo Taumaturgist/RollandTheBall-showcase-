@@ -36,7 +36,7 @@ public class Boss2Enemy : Enemy
     }
     public override void EnemyMove()
     {
-        //даем более сильный импульс боссу на краю арены
+        //give stronger impulse near the edge of arena
         if (transform.position.x > 5 || transform.position.x < -5 || transform.position.z > 5 || transform.position.z < -5) speed = 5f;
         else if (transform.position.x > 6 || transform.position.x < -6 || transform.position.z > 6 || transform.position.z < -6) speed = 10f;
         else if (transform.position.x > 7 || transform.position.x < -7 || transform.position.z > 7 || transform.position.z < -7) speed = 15f;

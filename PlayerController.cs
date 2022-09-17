@@ -11,10 +11,10 @@ public class PlayerController : MonoBehaviour
     public int falls = 0;
     public TextMeshProUGUI livesCounter;
 
-    //взрыв
+    //explosion on death
     public GameObject explosionPrefab;
 
-    //все для баффов
+    //all for buffs
     public float pushStrength = 15f;
     public bool hasPowerUp;
     public GameObject powerUpCircle;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private MeshRenderer powerUpMeshRend;
     private bool hasRedPowerUp;
 
-    //все для звуков
+    //all for sounds
     public bool isGrounded;
     private AudioSource playerAudio;
     public AudioClip[] playerRoll;
@@ -33,19 +33,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;    
     private FloatingJoystick joystickFloat;
     public Collider playerCollider;
-    private int levelNumber;
-    
+    private int levelNumber;  
 
-
-    //дебаг - тест скорости
+    //Debug - speed test TODO - transfer here
     private DebugManager debugManager;
     
-    
-
-    
-
-    
-
     private void Awake()
     {
         if (PlayerPrefs.HasKey("Level"))
@@ -53,8 +45,7 @@ public class PlayerController : MonoBehaviour
             levelNumber = PlayerPrefs.GetInt("Level");
             Debug.Log("Player Scenario: " + levelNumber);
         }
-    }
-    // Start is called before the first frame update
+    }    
     void Start()
     {
         playerRb = GameObject.Find("Ball").GetComponent<Rigidbody>();
@@ -69,8 +60,7 @@ public class PlayerController : MonoBehaviour
         {
             livesCounter.gameObject.SetActive(true);
             livesCounter.text = "ЖИЗНИ: " + lives;
-        }
-            
+        }           
             
     }
     private void FixedUpdate()
@@ -78,7 +68,7 @@ public class PlayerController : MonoBehaviour
         PCMoveInput();
         MobileMoveInput();
     }
-    // Update is called once per frame
+    
     void Update()
     {
 
@@ -98,7 +88,7 @@ public class PlayerController : MonoBehaviour
         float inputUpDown = Input.GetAxis("Vertical");
         float inputLeftRight = Input.GetAxis("Horizontal");
 
-        //катаем дочерний шарик
+        //roll child ball
         speed = debugManager.speed;
         playerRb.AddForce(transform.forward * speed * inputUpDown);
         playerRb.AddForce(transform.right * speed * inputLeftRight);
@@ -113,13 +103,10 @@ public class PlayerController : MonoBehaviour
             }
         }
         if (Input.GetKey(KeyCode.Space)) StartCoroutine(ExplodeRedPowerUp());
-
-
-
     }
     void MobileMoveInput()
     {
-        //катаем дочерний шарик        
+        //roll child ball        
         Vector3 direction = Vector3.forward * joystickFloat.Vertical + Vector3.right * joystickFloat.Horizontal;
         speed = debugManager.speed;
         playerRb.AddForce(direction * speed);
@@ -140,7 +127,7 @@ public class PlayerController : MonoBehaviour
         lives--;
         if (lives < 0)
         {
-            playerRb.transform.position = new Vector3(0, 1000, 0); //костыль на смену координаты Y, чтобы в каждом кадре не создавался взрыв игрока при поражении
+            playerRb.transform.position = new Vector3(0, 1000, 0); //crutch - change Y to avoid endless explosion loop. TODO - fix it
             StartCoroutine(WaitAndDefeat());
             
         }
@@ -182,7 +169,7 @@ public class PlayerController : MonoBehaviour
         hasRedPowerUp = true;
         buttonTAP.gameObject.SetActive(true);
         powerUpCircle.gameObject.SetActive(true);
-        powerUpMeshRend.material.color = new Color(1, 0.5f, 0, 1); //оранжевый
+        powerUpMeshRend.material.color = new Color(1, 0.5f, 0, 1); //orange
         StartCoroutine(PowerupCountdown());
     }
     public void TapExplodeRedPowerUp()

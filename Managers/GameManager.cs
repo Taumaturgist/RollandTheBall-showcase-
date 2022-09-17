@@ -33,8 +33,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Set Dynamically")]
     public int starsAmount;
-    public int levelResult = 0; // -1 дл€ поражени€, 1 дл€ победы
-    //прочие приватные пол€
+    public int levelResult = 0; // -1 for defeat, 1 for victory
+    
+    //other private fields
     private PlayerController playerController;
     private SpawnManager spawnManager;
     private int levelNumber;
@@ -54,7 +55,6 @@ public class GameManager : MonoBehaviour
         spawnManager = gameObject.GetComponent<SpawnManager>();
 
     }
-    // Start is called before the first frame update
     void Start()
     {
         GameScenarioSwitch();       
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-    }//вызываетс€ из SpawnManager
+    }//called from SpawnManager
     void GameScenario371()
     {      
         briefingText.text = "Ёѕ»«ќƒ 8: –астроение личности" + "\n" + "\n" +
@@ -304,7 +304,7 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-    }//вызываетс€ из SpawnManager
+    }//called from SpawnManager
     void GameScenario391()
     {
         briefingText.text = "Ёѕ»«ќƒ 10: „ерна€ дыра" + "\n" + "\n" +
@@ -334,21 +334,21 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Level", 0);
         SceneManager.LoadScene(0);
     }
-    public void CheckVictory() //вызываетс€ из SpawnManager при определенном событии (количество волн или фрагов)
+    public void CheckVictory() //called from SpawnManager on victory conditions meet
     {        
             Time.timeScale = 0f;
             victoryMenu.gameObject.SetActive(true);
             levelResult = 1;
             AudioListener.pause = true;
 
-        //пройдена тренировка
+        //tutorial
         if (levelNumber == 1)
         {
             victoryText.text = "ѕоздравл€ю с победой в первом бою!" + "\n" + "\n" +
                 "“еперь приступай к насто€щим испытани€м!";
         }
 
-        //пройден эпизод 1
+        //campaign episode 1
         if (levelNumber == 301)
         {
             victoryText.text = "Ёѕ»«ќƒ 1 пройден!" + "\n" + "\n" +
@@ -367,7 +367,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Stars Amount in E1: " + starsAmount);
         }
 
-        //пройден эпизод 2
+        //campaign episode 2
         if (levelNumber == 311)
         {
             victoryText.text = "Ёѕ»«ќƒ 2 пройден!" + "\n" + "\n" +
@@ -387,7 +387,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Stars Amount in E2: " + starsAmount);
         }
 
-        //пройден эпизод 3
+        //campaign episode 3
         if (levelNumber == 321)
         {
             victoryText.text = "Ёѕ»«ќƒ 3 пройден!" + "\n" + "\n" +
@@ -406,7 +406,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Stars Amount in E3: " + starsAmount);
         }
 
-        //пройден эпизод 4
+        //campaign episode 4
         if (levelNumber == 331)
         {
             victoryText.text = "Ёѕ»«ќƒ 4 пройден!" + "\n" + "\n" +
@@ -425,7 +425,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Stars Amount in E4: " + starsAmount);
         }
 
-        //пройден эпизод 5
+        //campaign episode 5
         if (levelNumber == 341)
         {
             victoryText.text = "Ёѕ»«ќƒ 5 пройден!" + "\n" + "\n" +
@@ -444,7 +444,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Stars Amount in E5: " + starsAmount);
         }
 
-        //пройден эпизод 6
+        //campaign episode 6
         if (levelNumber == 351)
         {
             victoryText.text = "Ёѕ»«ќƒ 6 пройден!" + "\n" + "\n" +
@@ -463,7 +463,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Stars Amount in E6: " + starsAmount);
         }
 
-        //пройден эпизод 7
+        //campaign episode 7
         if (levelNumber == 361)
         {
             victoryText.text = "Ёѕ»«ќƒ 7 пройден!" + "\n" + "\n" +
@@ -482,7 +482,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Stars Amount in E7: " + starsAmount);
         }
 
-        //пройден эпизод 8
+        //campaign episode 8
         if (levelNumber == 371)
         {
             victoryText.text = "Ёѕ»«ќƒ 8 пройден!" + "\n" + "\n" +
@@ -501,7 +501,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Stars Amount in E8: " + starsAmount);
         }
 
-        //пройден эпизод 9
+        //campaign episode 9
         if (levelNumber == 381)
         {
             victoryText.text = "Ёѕ»«ќƒ 9 пройден!" + "\n" + "\n" +
@@ -520,6 +520,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Stars Amount in E9: " + starsAmount);
         }
 
+        //campaign episode 10
         if (levelNumber == 391)
         {
             victoryText.text = "Ёѕ»«ќƒ 10 пройден!" + "\n" + "\n" +

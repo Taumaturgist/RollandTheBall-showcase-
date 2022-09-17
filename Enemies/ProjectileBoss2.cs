@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectileBoss2 : MonoBehaviour
 {
     [Header("Set in Inspector")]
-    public float speed; //от 2 до 4
+    public float speed; //range (2, 4)
     public GameObject blackHolePrefab;
 
     private float zDestroy = -10.0f;

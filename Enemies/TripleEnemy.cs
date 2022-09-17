@@ -17,7 +17,7 @@ public class TripleEnemy : Enemy
         speed = 10f;
         name = gameObject.name;
         tripleEnemyMesh = GetComponent<MeshRenderer>();
-        index = int.Parse(name.Substring(11, 1)); //получаем номер версии префаба врага
+        index = int.Parse(name.Substring(11, 1)); //get the prefab version number
     }
 
     public override void EnemyMove()
@@ -45,11 +45,11 @@ public class TripleEnemy : Enemy
 
     public override void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Environment")) enemyAudio.PlayOneShot(impact); //не звенят при контакте с полом
+        if (!collision.gameObject.CompareTag("Environment")) enemyAudio.PlayOneShot(impact); //don't cling when contact floor
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            //проверяем получение урона только для "старшей" версии врага
+            //check damage only for 'senior' prefab version
             
 
             Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();

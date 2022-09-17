@@ -10,6 +10,7 @@ using TMPro;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Titles and Menus")]
+    //TODO - put into list/array
     public GameObject gameTitle;
     public GameObject startMenu;
     public GameObject levelSelectMenu;
@@ -43,7 +44,7 @@ public class MainMenuManager : MonoBehaviour
         CheckEpisodesStars();
     }
     
-    //-----БЛОК МЕТОДОВ ДЛЯ ПЕРЕКЛЮЧЕНИЯ МЕНЮШЕК-----
+    //-----menus switching methods-----
 
     public void FromStartToLevel()
     {
@@ -103,69 +104,69 @@ public class MainMenuManager : MonoBehaviour
         startMenu.gameObject.SetActive(true);
     }
 
-    //-----БЛОК МЕТОДОВ ДЛЯ ЗАПУСКА СООТВЕТСТВУЮЩЕГО УРОВНЯ, СО СМЕНОЙ СЦЕНЫ
-    public void SetLevel1() //запуск Тренировки
+    //-----level start methods (change scene)-----
+    public void SetLevel1() //start tutorial
     {
         PlayerPrefs.SetInt("Level", 1);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel2() //запуск Выживания
+    public void SetLevel2() //start endless survival
     {
         PlayerPrefs.SetInt("Level", 2);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel301() //запуск Эпизода 1
+    public void SetLevel301() //start campaign episode 1
     {
         PlayerPrefs.SetInt("Level", 301);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel311() //запуск Эпизода 2
+    public void SetLevel311() //start campaign episode 2
     {
         PlayerPrefs.SetInt("Level", 311);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel321() //запуск Эпизода 3
+    public void SetLevel321() //start campaign episode 3
     {
         PlayerPrefs.SetInt("Level", 321);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel331() //запуск Эпизода 4
+    public void SetLevel331() //start campaign episode 4
     {
         PlayerPrefs.SetInt("Level", 331);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel341() //запуск Эпизода 5 - БОСС
+    public void SetLevel341() //start campaign episode 5 - BOSS 1
     {
         PlayerPrefs.SetInt("Level", 341);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel351() //запуск Эпизода 6 
+    public void SetLevel351() //start campaign episode 6 
     {
         PlayerPrefs.SetInt("Level", 351);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel361() //запуск Эпизода 7 
+    public void SetLevel361() //start campaign episode 7 
     {
         PlayerPrefs.SetInt("Level", 361);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel371() //запуск Эпизода 8 
+    public void SetLevel371() //start campaign episode 8 
     {
         PlayerPrefs.SetInt("Level", 371);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel381() //запуск Эпизода 9 
+    public void SetLevel381() //start campaign episode 9 
     {
         PlayerPrefs.SetInt("Level", 381);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel391() //запуск Эпизода 10 
+    public void SetLevel391() //start campaign episode 10 - BOSS 2
     {
         PlayerPrefs.SetInt("Level", 391);
         SceneManager.LoadScene(1);
     }
 
-    //-----БЛОК МЕТОДОВ ДЛЯ УЧЕТА ДОСТИЖЕНИЙ-----
+    //-----achievements display methods-----
 
     void CheckMaxWave() //максимально достигнутая волна в Выживании
     {
@@ -175,7 +176,7 @@ public class MainMenuManager : MonoBehaviour
             maxWaveText.text = "МАКСИМАЛЬНАЯ ВОЛНА: " + maxWave;
         }
     }
-    void CheckMCLN() //максимально достигнутый уровень в Кампании
+    void CheckMCLN() //max campaign episode reached (unlocks next episode) TODO - switch
     {
         if (PlayerPrefs.HasKey("MCLN"))
         {
@@ -229,7 +230,7 @@ public class MainMenuManager : MonoBehaviour
             Debug.Log("MaxCampaignLevenNumber is " + PlayerPrefs.GetInt("MCLN"));
         }
     }  
-    void CheckEpisodesStars()  //количество золотых звезд за эпизоды в Кампании
+    void CheckEpisodesStars()  //amount of golden stars awarded for each episode
         
     {
         if (PlayerPrefs.HasKey("E1S"))
@@ -358,22 +359,5 @@ public class MainMenuManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
-    }
-    //-----ЧИТЫ-----
-    public void ClearAllPrefs()
-    {
-        PlayerPrefs.DeleteAll();
-        Debug.Log("All Prefs are deleted");
-        SceneManager.LoadScene(0);
-    }
-    public void SetMCLN()
-    {
-        PlayerPrefs.SetInt("MCLN", 300);
-        SceneManager.LoadScene(0);
-    }
-    public void ClearMCLN()
-    {
-        PlayerPrefs.SetInt("MCLN", 0);
-        SceneManager.LoadScene(0);
-    }
+    }    
 }

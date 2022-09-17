@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 /// <summary>
-/// класс для управления спавном врагов.
-/// вначале идут методы вариантов спавна
-/// затем методы сценариев спавна, использующих те или иные варианты
+/// class for eneme and powerup spawn management
+/// spawn specific enemies methods first
+/// spawn scenaries after
 /// </summary>
 public class SpawnManager : MonoBehaviour
 {
@@ -108,19 +108,19 @@ public class SpawnManager : MonoBehaviour
                 break;
         }
     }
-    //-----МЕТОДЫ СПАВНА КОНКРЕТНЫХ ВРАГОВ-----
-    void SpawnEnemyWave(int enemiesToSpawn) //спавним Обычных врагов по нарастающей
+    //-----specific prefabs spawn methods-----
+    void SpawnEnemyWave(int enemiesToSpawn) //spawn BasicEnemy
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             Instantiate(enemyPrefabs[0], GenerateSpawnPosition(), enemyPrefabs[0].transform.rotation);
         }
     }
-    void SpawnFatEnemy() //спавним целенаправленно толстого врага
+    void SpawnFatEnemy() //spawn FatEnemy
     {
         Instantiate(enemyPrefabs[1], GenerateSpawnPosition(), enemyPrefabs[1].transform.rotation);
     }
-    void SpawnFatEnemy(int enemiesToSpawn) //спавним целенаправленно толстого - ПЕРЕГРУЗКА
+    void SpawnFatEnemy(int enemiesToSpawn) //spawn FatEnemy - override
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
@@ -128,7 +128,7 @@ public class SpawnManager : MonoBehaviour
         }
 
     }
-    void SpawnBasicFatEnemies(int enemiesToSpawn) //спавним случайного врага из массива
+    void SpawnBasicFatEnemies(int enemiesToSpawn) //spawn random enemy from array (Basic + Fat enemies)
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
@@ -136,11 +136,11 @@ public class SpawnManager : MonoBehaviour
             Instantiate(enemyPrefabs[randomEnemyIndex], GenerateSpawnPosition(), enemyPrefabs[randomEnemyIndex].transform.rotation);
         }
     }
-    void SpawnTripleEnemy() //спавним целенаправленно врага с растроением
+    void SpawnTripleEnemy() //spawn TripleEnemy
     {
         Instantiate(enemyPrefabs[2], GenerateSpawnPosition(), enemyPrefabs[2].transform.rotation);
     }
-    void SpawnTripleEnemy(int enemiesToSpawn) //спавним целенаправленно врага с растроением - ПЕРЕГРУЗКА
+    void SpawnTripleEnemy(int enemiesToSpawn) //spawn TripleEnemy - override
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
@@ -148,15 +148,15 @@ public class SpawnManager : MonoBehaviour
         }
         
     }
-    void SpawnBoss1Enemy() //спавним целенаправленно босса 1
+    void SpawnBoss1Enemy() //spawn BOSS 1
     {
         Instantiate(enemyBoss1, GenerateSpawnPosition(), enemyBoss1.transform.rotation);
     }
-    void SpawnBoss2Enemy() //спавним целенаправленно босса 2
+    void SpawnBoss2Enemy() //spawn BOSS 2
     {
         Instantiate(enemyBoss2, GenerateSpawnPosition(), enemyBoss2.transform.rotation);
     }
-    void SpawnSurvival(int enemiesToSpawn) //спавним случайного врага из массива
+    void SpawnSurvival(int enemiesToSpawn) //spawn any random enemy from array
     {                 
             for (int i = 0; i < enemiesToSpawn; i++)
             {
@@ -184,8 +184,8 @@ public class SpawnManager : MonoBehaviour
         Vector3 randomPos = new Vector3(spawnPosX, 0, spawnPosZ);
         return randomPos;
     }
-    //-----МЕТОДЫ ДЛЯ КОНКРЕТНЫХ СЦЕНАРИЕВ СПАВНА-----
-    public void SpawnScenario1() //Тренировка
+    //-----spawn scenario methods-----
+    public void SpawnScenario1() //tutorial
     {
         if (northCube.isTriggered && spawnIsActive && spawnScenario == 1) 
         {            
@@ -202,7 +202,7 @@ public class SpawnManager : MonoBehaviour
 
     }
     
-    void SpawnScenario2() //выживание
+    void SpawnScenario2() //endless survival
     {
         waveNumberText.gameObject.SetActive(true);       
             
@@ -218,7 +218,7 @@ public class SpawnManager : MonoBehaviour
         }  
         
     }
-    void SpawnScenario301() //эпизод 1 Кампании "досчитай до 10"
+    void SpawnScenario301() //campaign episode 1 'count up to 10'
     {
         waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
@@ -239,7 +239,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
-    void SpawnScenario311() //эпизод 2 Кампании
+    void SpawnScenario311() //campaign episode 2 'size matters'
     {
         waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
@@ -261,7 +261,7 @@ public class SpawnManager : MonoBehaviour
             }    
         }
     }
-    void SpawnScenario321() //эпизод 3 Кампании "Волшебная таблетка"
+    void SpawnScenario321() //campaign episode 3 'magic pill'
     {
         waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
@@ -284,7 +284,7 @@ public class SpawnManager : MonoBehaviour
             } 
         }
     }
-    void SpawnScenario331() //эпизод 4 Кампании "Головокружительно"
+    void SpawnScenario331() //campaign episode 4 'vertigo'
     {
         waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
@@ -308,7 +308,7 @@ public class SpawnManager : MonoBehaviour
 
         }
     }
-    void SpawnScenario341() //эпизод 5 "Кто здесь Босс?"
+    void SpawnScenario341() //campaign episode 5 'who's the boss?'
     {
         if (spawnIsActive)
         {
@@ -322,7 +322,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("SpawnManager checks Victory Condition");
         }
     }
-    void SpawnScenario351() //эпизод 6 "Прием против лома"
+    void SpawnScenario351() //campaign episode 6 'right makes might'
     {
         waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
@@ -346,7 +346,7 @@ public class SpawnManager : MonoBehaviour
         }
         
     }
-    void SpawnScenario361() //эпизод 7 "Наброс на вентилятор"
+    void SpawnScenario361() //campaign episode 7 'it hits the fan'
     {
         waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
@@ -365,7 +365,7 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    void SpawnScenario371() //эпизод 8 "Растроение личности"
+    void SpawnScenario371() //campaign episode 8 'personality split' 
     {
         waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
@@ -387,7 +387,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
-    void SpawnScenario381() //эпизод 9 "Полное безумие"
+    void SpawnScenario381() //campaign episode 9 'total madness'
     {
         waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
@@ -409,7 +409,7 @@ public class SpawnManager : MonoBehaviour
             } 
         }
     }
-    void SpawnScenario391() //эпизод 10 "Черная дыра"
+    void SpawnScenario391() //campaign episode 10 'black hole'
     {
         if (spawnIsActive)
         {
