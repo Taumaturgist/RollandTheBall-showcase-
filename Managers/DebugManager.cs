@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using UnityEditor;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -108,11 +109,36 @@ public class DebugManager : MonoBehaviour
         int statWaveNum = spawnManager.waveNumber;
         int statStarsAmount = gameManager.starsAmount;
 
+#if UNITY_EDITOR
         Debug.Log("%playerID at: " + statTimeNow + "; has completed Level: " + statLevelNum + "; in " + statLevelTimer +
-             "; with Result " + statLevelResult + "; Lives left: " + statPlayerLives + "; Wave reached: " + statWaveNum + 
+             "; with Result " + statLevelResult + "; Lives left: " + statPlayerLives + "; Wave reached: " + statWaveNum +
              "; Stars earned: " + statStarsAmount + ";");
+#else
+        StartCoroutine(GetRequest("https://gideon-smart.ru/tau/logger/rollo.php?" 
+            + "level_num=" + statLevelNum 
+            + "&level_timer=" + statLevelTimer 
+            + "&level_result=" + statLevelResult 
+            + "&player_lives=" + statPlayerLives 
+            + "&wave_num=" + statWaveNum 
+            + "&stars_amount=" + statStarsAmount)
+            + "&build_version=0.1.15");
+#endif
     }
-    
+    private IEnumerator GetRequest(string uri)
+    {
+        UnityWebRequest uwr = UnityWebRequest.Get(uri);
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result == UnityWebRequest.Result.ConnectionError)
+        {
+            Debug.Log("Error While Sending: " + uwr.error);
+        }
+        else
+        {
+            //Debug.Log("Received: " + uwr.downloadHandler.text);
+        }
+    }
+
     //CHEATS
     public void ConfirmCheat()
     {
