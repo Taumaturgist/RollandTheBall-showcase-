@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();               
         arenaRotator = arena.GetComponent<Rotate>();
         spawnManager = gameObject.GetComponent<SpawnManager>();
+        if (levelNumber != 1) northCube.gameObject.SetActive(false);
 
     }
     void Start()
@@ -110,7 +111,7 @@ public class GameManager : MonoBehaviour
             "Сейчас ты в безопасности. Освойся с управлением джойстиком и переключением скоростей. Учти, у шарика есть масса и инерция, а вместо тормоза - обратный газ!" + "\n" + "\n" +
             "Когда разберешься с управлением, коснись шариком синего кубика - это вызовет одного соперника. Для победы достаточно скинуть его с Арены - или сделать так, чтобы он слетел с нее сам!";
     
-        northCube.gameObject.SetActive(true);
+        //northCube.gameObject.SetActive(true);
     }
     void GameScenario2()
     {
