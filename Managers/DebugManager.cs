@@ -108,11 +108,13 @@ public class DebugManager : MonoBehaviour
         int statPlayerLives = playerController.lives;
         int statWaveNum = spawnManager.waveNumber;
         int statStarsAmount = gameManager.starsAmount;
+        string statBuildVersion = Application.version;
 
 #if UNITY_EDITOR
         Debug.Log("%playerID at: " + statTimeNow + "; has completed Level: " + statLevelNum + "; in " + statLevelTimer +
              "; with Result " + statLevelResult + "; Lives left: " + statPlayerLives + "; Wave reached: " + statWaveNum +
              "; Stars earned: " + statStarsAmount + ";");
+        Debug.Log("Build version is: " + statBuildVersion);
 #else
         StartCoroutine(GetRequest("https://gideon-smart.ru/tau/logger/rollo.php?" 
             + "level_num=" + statLevelNum 
@@ -121,7 +123,7 @@ public class DebugManager : MonoBehaviour
             + "&player_lives=" + statPlayerLives 
             + "&wave_num=" + statWaveNum 
             + "&stars_amount=" + statStarsAmount)
-            + "&build_version=0.1.15");
+            + "&build_version=" + statBuildVersion);
 #endif
     }
     private IEnumerator GetRequest(string uri)
