@@ -14,11 +14,11 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemyBoss1;    
     public GameObject enemyBoss2;
     public TextMeshProUGUI waveNumberText;
-    public int waveNumber = 1;
+    public int waveNumber = 1;   
 
     private int spawnScenario;    
     private NorthCube northCube;
-    private float spawnRange = 7.0f;     
+    private float spawnRange = 7.0f;
     private bool spawnIsActive;
     private int bodyCount;
     private int bossBodyCount;
@@ -40,11 +40,12 @@ public class SpawnManager : MonoBehaviour
         {
             northCube = GameObject.Find("NorthCube").GetComponent<NorthCube>();
             ChangeSpawnActivity();
+            waveNumberText.gameObject.SetActive(false);
         } 
         else Invoke("ChangeSpawnActivity", 3);
         
     }
-    void ChangeSpawnActivity()
+    public void ChangeSpawnActivity()
     {
         spawnIsActive = !spawnIsActive;
         if (waveNumber == 1) SpawnScenarioSwitch();
@@ -64,7 +65,8 @@ public class SpawnManager : MonoBehaviour
     {
         int enemyCount = FindObjectsOfType<Enemy>().Length;
         Debug.Log("Enemies left on Arena: " + enemyCount);
-        if (enemyCount == 0) SpawnScenarioSwitch();
+        if (enemyCount == 0 && spawnIsActive) SpawnScenarioSwitch();
+
     }
     void SpawnScenarioSwitch()
     {
@@ -204,9 +206,6 @@ public class SpawnManager : MonoBehaviour
     
     void SpawnScenario2() //endless survival
     {
-        waveNumberText.gameObject.SetActive(true);       
-            
-              
         if (spawnIsActive)
         {
             SendMessage("GameScenario2");
@@ -220,7 +219,6 @@ public class SpawnManager : MonoBehaviour
     }
     void SpawnScenario301() //campaign episode 1 'count up to 10'
     {
-        waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
         {
             SendMessage("CheckVictory");
@@ -241,7 +239,6 @@ public class SpawnManager : MonoBehaviour
     }
     void SpawnScenario311() //campaign episode 2 'size matters'
     {
-        waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
         {
             SendMessage("CheckVictory");
@@ -263,7 +260,6 @@ public class SpawnManager : MonoBehaviour
     }
     void SpawnScenario321() //campaign episode 3 'magic pill'
     {
-        waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
         {
             SendMessage("CheckVictory");
@@ -286,7 +282,6 @@ public class SpawnManager : MonoBehaviour
     }
     void SpawnScenario331() //campaign episode 4 'vertigo'
     {
-        waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
         {
             SendMessage("CheckVictory");
@@ -324,7 +319,6 @@ public class SpawnManager : MonoBehaviour
     }
     void SpawnScenario351() //campaign episode 6 'right makes might'
     {
-        waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
         {
             SendMessage("CheckVictory");
@@ -348,7 +342,6 @@ public class SpawnManager : MonoBehaviour
     }
     void SpawnScenario361() //campaign episode 7 'it hits the fan'
     {
-        waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
         {
             SendMessage("CheckVictory");
@@ -367,7 +360,6 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnScenario371() //campaign episode 8 'personality split' 
     {
-        waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
         {
             SendMessage("CheckVictory");
@@ -389,7 +381,6 @@ public class SpawnManager : MonoBehaviour
     }
     void SpawnScenario381() //campaign episode 9 'total madness'
     {
-        waveNumberText.gameObject.SetActive(true);
         if (waveNumber == 11)
         {
             SendMessage("CheckVictory");

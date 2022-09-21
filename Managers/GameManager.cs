@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
             "Сейчас ты в безопасности. Освойся с управлением джойстиком и переключением скоростей. Учти, у шарика есть масса и инерция, а вместо тормоза - обратный газ!" + "\n" + "\n" +
             "Когда разберешься с управлением, коснись шариком синего кубика - это вызовет одного соперника. Для победы достаточно скинуть его с Арены - или сделать так, чтобы он слетел с нее сам!";
     
-        //northCube.gameObject.SetActive(true);
+      
     }
     void GameScenario2()
     {
@@ -316,14 +316,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
-        AudioListener.pause = true;
+        AudioListener.pause = true;       
 
     }
     public void UnpauseGame()
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
-        AudioListener.pause = false;
+        AudioListener.pause = false;        
 
     }
     public void RestartScene()
@@ -331,12 +331,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
     public void QuitToMainMenu()
-    {
+    {   
+        spawnManager.ChangeSpawnActivity();
         PlayerPrefs.SetInt("Level", 0);
         SceneManager.LoadScene(0);
     }
     public void CheckVictory() //called from SpawnManager on victory conditions meet
-    {        
+    {            
             Time.timeScale = 0f;
             victoryMenu.gameObject.SetActive(true);
             levelResult = 1;
@@ -574,9 +575,9 @@ public class GameManager : MonoBehaviour
             
     }
     public void CheckDefeat()
-    {
+    {   
         if (levelNumber != 1 && playerController.lives < 0)
-        {
+        {            
             Time.timeScale = 0f;
             defeatMenu.gameObject.SetActive(true);
             levelResult = -1;
