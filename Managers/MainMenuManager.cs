@@ -351,6 +351,14 @@ public class MainMenuManager : MonoBehaviour
         if (starsAmount >= 2) Star2.GetComponent<Image>().color = Color.yellow;
         if (starsAmount == 3) Star3.GetComponent<Image>().color = Color.yellow;
     }
+    public void OpenPolicy()
+    {
+        Application.OpenURL("https://pages.flycricket.io/rolland-the-ball/privacy.html");
+    }
+    public void OpenTerms()
+    {
+        Application.OpenURL("https://pages.flycricket.io/rolland-the-ball/terms.html");
+    }
     public void QuitGame()
     {
         PlayerPrefs.SetInt("Level", 0);
