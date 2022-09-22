@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     public int lives = 2;
     public int falls = 0;
     public TextMeshProUGUI livesCounter;
-    public GameObject[] tipPanels;
+    public GameObject tipPanel;
+
 
     //explosion on death
     public GameObject explosionPrefab;
@@ -34,8 +35,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;    
     private FloatingJoystick joystickFloat;
     public Collider playerCollider;
-    private int levelNumber; 
+    private int levelNumber;
     
+
 
     //Debug - speed test TODO - transfer here
     private DebugManager debugManager;
@@ -59,10 +61,11 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("Main Camera").GetComponent<GameManager>();
         playerAudio = GetComponent<AudioSource>();
         powerUpMeshRend = powerUpCircle.GetComponent<MeshRenderer>();
+        
 
-        if (levelNumber != 1)
+        if (levelNumber == 1)
         {
-            livesCounter.gameObject.SetActive(true);
+            livesCounter.gameObject.SetActive(false);
             livesCounter.text = "ÆÈÇÍÈ: " + lives;
         }           
             
@@ -108,7 +111,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space)) StartCoroutine(ExplodeRedPowerUp());
 
-        if (Input.anyKeyDown && gameManager.isGameActive) StartCoroutine(RemovePlayerTip(1));
+        if (Input.anyKeyDown && gameManager.isGameActive) StartCoroutine(RemovePlayerTip());
     }
     void MobileMoveInput()
     {
@@ -126,14 +129,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.touchCount > 0 && gameManager.isGameActive) StartCoroutine(RemovePlayerTip(0));
+        if (Input.touchCount > 0 && gameManager.isGameActive) StartCoroutine(RemovePlayerTip());
 
     }
 
     public void Respawn()
     {       
         Instantiate(explosionPrefab, playerRb.transform.position, playerRb.transform.rotation);
-        lives--;
+        if (levelNumber != 1) lives--;
         if (lives < 0)
         {
             playerRb.transform.position = new Vector3(0, 1000, 0); //crutch - change Y to avoid endless explosion loop. TODO - fix it
@@ -199,24 +202,26 @@ public class PlayerController : MonoBehaviour
         playerRb.velocity = Vector3.zero;
     } 
     void SetPlayerTip()
-    {
+    {       
+        tipPanel.gameObject.SetActive(true);
+        TextMeshProUGUI tipText = tipPanel.GetComponentInChildren<TextMeshProUGUI>();
         switch (Application.platform)
             {
                 case RuntimePlatform.Android:
                 case RuntimePlatform.IPhonePlayer:
-                tipPanels[0].gameObject.SetActive(true);
+                tipText.text = "SWIPE! SWIPE! SWIPE!";
                 break;
                 case RuntimePlatform.WebGLPlayer:
                 case RuntimePlatform.WindowsPlayer:
                 case RuntimePlatform.WindowsEditor:
-                tipPanels[1].gameObject.SetActive(true);
+                tipText.text = "USE ARROWS TO MOVE!";
                 break;
         }
     }
-    IEnumerator RemovePlayerTip(int tipIndex)
+    IEnumerator RemovePlayerTip()
     {
         yield return new WaitForSeconds(1);
-        tipPanels[tipIndex].gameObject.SetActive(false);
+        tipPanel.gameObject.SetActive(false);
     }
 }
 
