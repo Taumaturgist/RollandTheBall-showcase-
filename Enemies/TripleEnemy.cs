@@ -35,6 +35,7 @@ public class TripleEnemy : Enemy
             else
             {
                 spawnManager.BodyCount();
+                spawnManager.CheckEnemyPresence();
                 Debug.Log("Enemy killed");
                 Instantiate(explosionPrefab, transform.position, transform.rotation);
                 Destroy(gameObject);
@@ -85,9 +86,5 @@ public class TripleEnemy : Enemy
     void SpawnSmallerCopy(int prefabNumber)
     {
         Instantiate(tripleEnemyPrefabs[prefabNumber], transform.position, transform.rotation);
-    }
-    public override void OnDestroy()
-    {
-        if (index != 1) spawnManager.CheckEnemyPresence();
-    }
+    }  
 }

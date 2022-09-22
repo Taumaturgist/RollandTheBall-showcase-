@@ -60,14 +60,11 @@ public class Enemy : MonoBehaviour
         Vector3 lookDirection = (playerBall.transform.position - transform.position).normalized;
         enemyRb.AddForce(lookDirection * speed);
         if (transform.position.y < -2) KillEnemy();       
-    }
-    public virtual void OnDestroy()
-    {
-        spawnManager.CheckEnemyPresence();
-    }
+    }   
     void KillEnemy()
     {
         spawnManager.BodyCount();
+        spawnManager.CheckEnemyPresence();
         Debug.Log("Enemy killed");
         Instantiate(explosionPrefab, transform.position, transform.rotation);
         Destroy(gameObject);

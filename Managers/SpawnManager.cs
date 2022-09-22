@@ -63,10 +63,14 @@ public class SpawnManager : MonoBehaviour
     }
     public void CheckEnemyPresence()
     {
+        StartCoroutine(SearchAndSpawn());
+    }
+    IEnumerator SearchAndSpawn()
+    {
+        yield return new WaitForSeconds(1);
         int enemyCount = FindObjectsOfType<Enemy>().Length;
         Debug.Log("Enemies left on Arena: " + enemyCount);
         if (enemyCount == 0 && spawnIsActive) SpawnScenarioSwitch();
-
     }
     void SpawnScenarioSwitch()
     {

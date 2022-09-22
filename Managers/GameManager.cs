@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     [Header("Set Dynamically")]
     public int starsAmount;
     public int levelResult = 0; // -1 for defeat, 1 for victory
+    public bool isGameActive;
     
     //other private fields
     private PlayerController playerController;
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
     {
         GameScenarioSwitch();       
         PauseGame();
-    }
+    }    
     void GameScenarioSwitch()
     {
         switch (levelNumber)
@@ -316,14 +317,16 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
-        AudioListener.pause = true;       
+        AudioListener.pause = true;
+        isGameActive = false;
 
     }
     public void UnpauseGame()
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
-        AudioListener.pause = false;        
+        AudioListener.pause = false;
+        isGameActive = true;
 
     }
     public void RestartScene()

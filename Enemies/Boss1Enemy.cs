@@ -53,6 +53,7 @@ public class Boss1Enemy : Enemy
                     
                     if (index == 5)
                     {
+                        spawnManager.CheckEnemyPresence();
                         Instantiate(explosionPrefab, transform.position, transform.rotation);
                         Destroy(gameObject);
                     }                        
@@ -69,9 +70,5 @@ public class Boss1Enemy : Enemy
     private void SpawnSmallerCopy(int prefabNumber)
     {        
         Instantiate(bossPrefabs[prefabNumber], transform.position, transform.rotation);
-    }
-    public override void OnDestroy()
-    {
-        if (index == 5) spawnManager.CheckEnemyPresence();
-    }
+    } 
 }
