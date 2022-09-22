@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public int lives = 2;
     public int falls = 0;
     public TextMeshProUGUI livesCounter;
+    public GameObject[] tipPanels;
 
     //explosion on death
     public GameObject explosionPrefab;
@@ -33,7 +34,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;    
     private FloatingJoystick joystickFloat;
     public Collider playerCollider;
-    private int levelNumber;  
+    private int levelNumber; 
+    
 
     //Debug - speed test TODO - transfer here
     private DebugManager debugManager;
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour
             levelNumber = PlayerPrefs.GetInt("Level");
             Debug.Log("Player Scenario: " + levelNumber);
         }
+
+        SetPlayerTip();
     }    
     void Start()
     {
@@ -103,6 +107,8 @@ public class PlayerController : MonoBehaviour
             }
         }
         if (Input.GetKey(KeyCode.Space)) StartCoroutine(ExplodeRedPowerUp());
+
+        if (Input.anyKeyDown && gameManager.isGameActive) StartCoroutine(RemovePlayerTip(1));
     }
     void MobileMoveInput()
     {
@@ -119,6 +125,9 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(playerRoll[playerRandomRoll]);
             }
         }
+
+        if (Input.touchCount > 0 && gameManager.isGameActive) StartCoroutine(RemovePlayerTip(0));
+
     }
 
     public void Respawn()
@@ -188,6 +197,26 @@ public class PlayerController : MonoBehaviour
     {
         playerRb.transform.position = new Vector3(0, 1, 0);
         playerRb.velocity = Vector3.zero;
-    }    
+    } 
+    void SetPlayerTip()
+    {
+        switch (Application.platform)
+            {
+                case RuntimePlatform.Android:
+                case RuntimePlatform.IPhonePlayer:
+                tipPanels[0].gameObject.SetActive(true);
+                break;
+                case RuntimePlatform.WebGLPlayer:
+                case RuntimePlatform.WindowsPlayer:
+                case RuntimePlatform.WindowsEditor:
+                tipPanels[1].gameObject.SetActive(true);
+                break;
+        }
+    }
+    IEnumerator RemovePlayerTip(int tipIndex)
+    {
+        yield return new WaitForSeconds(1);
+        tipPanels[tipIndex].gameObject.SetActive(false);
+    }
 }
 
