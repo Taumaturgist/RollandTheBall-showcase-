@@ -95,35 +95,37 @@ public class DebugManager : MonoBehaviour
     }
     void UpdateTimer()
     {
-        inLevelTimerString = Mathf.Ceil(inLevelTimerInt / 60).ToString("00") + " : " + (inLevelTimerInt % 60).ToString("00");
+        inLevelTimerString = Mathf.Ceil(inLevelTimerInt / 60).ToString("00") + ":" + (inLevelTimerInt % 60).ToString("00");
         timerText.text = inLevelTimerString;
     }
-    //called on any level quit button press (victory, defeat, interrupt). should send string to statistics server
+    //called on any level quit button press (victory, defeat, interrupt). sends string to statistics server
+    //---TO DO: send build version as well, now sends '???'---
     public void MakeStatSnapShot()
     {
         string statTimeNow = DateTime.UtcNow.ToString();
-        int statLevelNum = levelNumber;
+        string statLevelNum = levelNumber.ToString();
         string statLevelTimer = inLevelTimerString;
-        int statLevelResult = gameManager.levelResult;
-        int statPlayerLives = playerController.lives;
-        int statWaveNum = spawnManager.waveNumber;
-        int statStarsAmount = gameManager.starsAmount;
-        string statBuildVersion = Application.version;
+        string statLevelResult = gameManager.levelResult.ToString();
+        string statPlayerLives = playerController.lives.ToString();
+        string statWaveNum = spawnManager.waveNumber.ToString();
+        string statStarsAmount = gameManager.starsAmount.ToString();
+        string statBuildVersion = Application.version.ToString();
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR      
+
         Debug.Log("%playerID at: " + statTimeNow + "; has completed Level: " + statLevelNum + "; in " + statLevelTimer +
              "; with Result " + statLevelResult + "; Lives left: " + statPlayerLives + "; Wave reached: " + statWaveNum +
              "; Stars earned: " + statStarsAmount + ";");
         Debug.Log("Build version is: " + statBuildVersion);
 #else
-        StartCoroutine(GetRequest("https://gideon-smart.ru/tau/logger/rollo.php?" 
-            + "level_num=" + statLevelNum 
-            + "&level_timer=" + statLevelTimer 
-            + "&level_result=" + statLevelResult 
-            + "&player_lives=" + statPlayerLives 
-            + "&wave_num=" + statWaveNum 
-            + "&stars_amount=" + statStarsAmount)
-            + "&build_version=" + statBuildVersion);
+        StartCoroutine(GetRequest("https://gideon-smart.ru/tau/logger/rollo.php?"
+            + "&build_version=" + UnityWebRequest.EscapeURL(statBuildVersion) //sends '???'
+            + "&level_num=" + UnityWebRequest.EscapeURL(statLevelNum)
+            + "&level_timer=" + UnityWebRequest.EscapeURL(statLevelTimer)
+            + "&level_result=" + UnityWebRequest.EscapeURL(statLevelResult)
+            + "&player_lives=" + UnityWebRequest.EscapeURL(statPlayerLives)
+            + "&wave_num=" + UnityWebRequest.EscapeURL(statWaveNum)
+            + "&stars_amount=" + UnityWebRequest.EscapeURL(statStarsAmount)));
 #endif
     }
     private IEnumerator GetRequest(string uri)
