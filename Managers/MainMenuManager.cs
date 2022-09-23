@@ -41,7 +41,7 @@ public class MainMenuManager : MonoBehaviour
     {
         CheckMaxWave();
         CheckMCLN();
-        CheckEpisodesStars();
+        
     }
     
     //-----menus switching methods-----
@@ -50,39 +50,15 @@ public class MainMenuManager : MonoBehaviour
     {
         startMenu.gameObject.SetActive(false);
         levelSelectMenu.gameObject.SetActive(true);
+        CheckEpisodesStars();
     }
     
     public void FromLevelToStart()
     {
         levelSelectMenu.gameObject.SetActive(false);
         startMenu.gameObject.SetActive(true);
-    }
-    public void FromLevelToCampaign1()
-    {
-        levelSelectMenu.gameObject.SetActive(false);
-        campaignMenu1.gameObject.SetActive(true);
-        CheckEpisodesStars();
-    }
-    public void FromCampaign1ToLevel()
-    {
-        campaignMenu1.gameObject.SetActive(false);
-        levelSelectMenu.gameObject.SetActive(true);
-    }
-    public void FromCampaign2ToLevel()
-    {
-        campaignMenu2.gameObject.SetActive(false);
-        levelSelectMenu.gameObject.SetActive(true);
-    }
-    public void FromCampaign1ToCampaign2()
-    {
-        campaignMenu1.gameObject.SetActive(false);
-        campaignMenu2.gameObject.SetActive(true);
-    }
-    public void FromCampaign2ToCampaign1()
-    {
-        campaignMenu2.gameObject.SetActive(false);
-        campaignMenu1.gameObject.SetActive(true);
-    }
+    }       
+    
     public void FromStartToSettings()
     {
         startMenu.gameObject.SetActive(false);
@@ -93,17 +69,7 @@ public class MainMenuManager : MonoBehaviour
         settingsMenu.gameObject.SetActive(false);
         startMenu.gameObject.SetActive(true);
     }
-    public void FromStartToStatistics()
-    {
-        startMenu.gameObject.SetActive(false);
-        statisticsMenu.gameObject.SetActive(true);
-    }
-    public void FromStatisticsToStart()
-    {
-        statisticsMenu.gameObject.SetActive(false);
-        startMenu.gameObject.SetActive(true);
-    }
-
+    
     //-----level start methods (change scene)-----
     public void SetLevel1() //start tutorial
     {
@@ -173,7 +139,7 @@ public class MainMenuManager : MonoBehaviour
         if (PlayerPrefs.HasKey("MaxWave"))
         {
             maxWave = PlayerPrefs.GetInt("MaxWave");
-            maxWaveText.text = "Ã¿ —»Ã¿À‹Õ¿ﬂ ¬ŒÀÕ¿: " + maxWave;
+            maxWaveText.text = ": " + maxWave;
         }
     }
     void CheckMCLN() //max campaign episode reached (unlocks next episode) TODO - switch
