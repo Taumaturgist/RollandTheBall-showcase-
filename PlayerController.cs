@@ -206,14 +206,14 @@ public class PlayerController : MonoBehaviour
         tipPanel.gameObject.SetActive(true);
         TextMeshProUGUI tipText = tipPanel.GetComponentInChildren<TextMeshProUGUI>();
         switch (Application.platform)
-            {
-                case RuntimePlatform.Android:
-                case RuntimePlatform.IPhonePlayer:
+        {
+            case RuntimePlatform.Android:
+            case RuntimePlatform.IPhonePlayer:
                 tipText.text = "SWIPE! SWIPE! SWIPE!";
                 break;
-                case RuntimePlatform.WebGLPlayer:
-                case RuntimePlatform.WindowsPlayer:
-                case RuntimePlatform.WindowsEditor:
+            case RuntimePlatform.WebGLPlayer:
+            case RuntimePlatform.WindowsPlayer:
+            case RuntimePlatform.WindowsEditor:
                 tipText.text = "USE ARROWS TO MOVE!";
                 break;
         }
