@@ -114,6 +114,16 @@ public class SpawnManager : MonoBehaviour
                 break;
         }
     }
+    void CheckVictory(int waveNumber)
+    {
+        if (waveNumber == 11)
+        {
+            spawnIsActive = false;
+            Debug.Log("Spawn is stopped due to last wave: " + waveNumber);
+            SendMessage("CheckVictory");
+            Debug.Log("SpawnManager checks Victory Condition");
+        }
+    }
     //-----specific prefabs spawn methods-----
     void SpawnEnemyWave(int enemiesToSpawn) //spawn BasicEnemy
     {
@@ -223,88 +233,47 @@ public class SpawnManager : MonoBehaviour
     }
     void SpawnScenario301() //campaign episode 1 'count up to 10'
     {
-        if (waveNumber == 11)
-        {
-            SendMessage("CheckVictory");
-            Debug.Log("SpawnManager checks Victory Condition");
-
-        }
+        CheckVictory(waveNumber);
         if (spawnIsActive)
         {
             SpawnEnemyWave(waveNumber);
             waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
-            waveNumber++;
-            if (waveNumber == 11)
-            {
-                spawnIsActive = false;
-                Debug.Log("Spawn is stopped due to last wave: " + waveNumber);
-            }
+            waveNumber++;            
         }
     }
     void SpawnScenario311() //campaign episode 2 'size matters'
     {
-        if (waveNumber == 11)
-        {
-            SendMessage("CheckVictory");
-            Debug.Log("SpawnManager checks Victory Condition");
-
-        }
+        CheckVictory(waveNumber);
         if (spawnIsActive)
         {
             SpawnEnemyWave(waveNumber);
             SpawnFatEnemy();
             waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
-            waveNumber++;
-            if (waveNumber == 11)
-            {
-                spawnIsActive = false;
-                Debug.Log("Spawn is stopped due to last wave: " + waveNumber);
-            }    
+            waveNumber++;           
         }
     }
     void SpawnScenario321() //campaign episode 3 'magic pill'
     {
-        if (waveNumber == 11)
-        {
-            SendMessage("CheckVictory");
-            Debug.Log("SpawnManager checks Victory Condition");
-
-        }
+        CheckVictory(waveNumber);
         if (spawnIsActive)
         {
             SpawnEnemyWave(waveNumber * 2);
             SpawnFatEnemy();
             SpawnYellowPowerUp();
             waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
-            waveNumber++;
-            if (waveNumber == 11)
-            {
-                spawnIsActive = false;
-                Debug.Log("Spawn is stopped due to last wave: " + waveNumber);
-            } 
+            waveNumber++;            
         }
     }
     void SpawnScenario331() //campaign episode 4 'vertigo'
     {
-        if (waveNumber == 11)
-        {
-            SendMessage("CheckVictory");
-            Debug.Log("SpawnManager checks Victory Condition");
-
-        }
+        CheckVictory(waveNumber);
         if (spawnIsActive)
         {
             SpawnEnemyWave(waveNumber * 2);
             SpawnFatEnemy();
             SpawnYellowPowerUp();
             waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
-            waveNumber++;
-            if (waveNumber == 11)
-            {
-                spawnIsActive = false;
-                Debug.Log("Spawn is stopped due to last wave: " + waveNumber);
-            } 
-
+            waveNumber++;            
         }
     }
     void SpawnScenario341() //campaign episode 5 'who's the boss?'
@@ -312,8 +281,7 @@ public class SpawnManager : MonoBehaviour
         if (spawnIsActive)
         {
             SpawnBoss1Enemy();
-        }
-            
+        }           
 
         if (bossBodyCount >= 31)
         {
@@ -323,34 +291,19 @@ public class SpawnManager : MonoBehaviour
     }
     void SpawnScenario351() //campaign episode 6 'right makes might'
     {
-        if (waveNumber == 11)
-        {
-            SendMessage("CheckVictory");
-            Debug.Log("SpawnManager checks Victory Condition");
-
-        }
-
+        CheckVictory(waveNumber);
         if (spawnIsActive)
         {
             SpawnFatEnemy(waveNumber + 1);
             SpawnRedPowerUp();
             waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
-            waveNumber++;
-            if (waveNumber == 11)
-            {
-                spawnIsActive = false;
-                Debug.Log("Spawn is stopped due to last wave: " + waveNumber);
-            }
+            waveNumber++;            
         }
         
     }
     void SpawnScenario361() //campaign episode 7 'it hits the fan'
     {
-        if (waveNumber == 11)
-        {
-            SendMessage("CheckVictory");
-            Debug.Log("SpawnManager checks Victory Condition");
-        }
+        CheckVictory(waveNumber);
         if (spawnIsActive)
         {
             SpawnBasicFatEnemies(waveNumber);
@@ -364,44 +317,25 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnScenario371() //campaign episode 8 'personality split' 
     {
-        if (waveNumber == 11)
-        {
-            SendMessage("CheckVictory");
-            Debug.Log("SpawnManager checks Victory Condition");
-        }       
-
+        CheckVictory(waveNumber);
         if (spawnIsActive)
         {
             SpawnTripleEnemy(waveNumber);
             SpawnRandomPowerUp();
             waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
-            waveNumber++;
-            if (waveNumber == 11)
-            {
-                spawnIsActive = false;
-                Debug.Log("Spawn is stopped due to last wave: " + waveNumber);
-            }
+            waveNumber++;            
         }
     }
     void SpawnScenario381() //campaign episode 9 'total madness'
     {
-        if (waveNumber == 11)
-        {
-            SendMessage("CheckVictory");
-            Debug.Log("SpawnManager checks Victory Condition");
-        }
+        CheckVictory(waveNumber);
         if (spawnIsActive)
         {
             SpawnSurvival(waveNumber);
             SpawnRandomPowerUp();
             waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
             if (waveNumber > 1) SendMessage("GameSubScenario381");
-            waveNumber++;
-            if (waveNumber == 11)
-            {
-                spawnIsActive = false;
-                Debug.Log("Spawn is stopped due to last wave: " + waveNumber);
-            } 
+            waveNumber++;            
         }
     }
     void SpawnScenario391() //campaign episode 10 'black hole'

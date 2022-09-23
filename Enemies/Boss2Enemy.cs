@@ -57,6 +57,7 @@ public class Boss2Enemy : Enemy
         if (bossLives <= 0)
         {
             spawnManager.BossBodyCount();
+            spawnManager.CheckEnemyPresence();
             Debug.Log("Enemy killed");
             Instantiate(explosionPrefab, transform.position, transform.rotation);
             Destroy(gameObject);

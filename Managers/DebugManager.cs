@@ -117,9 +117,17 @@ public class DebugManager : MonoBehaviour
              "; with Result " + statLevelResult + "; Lives left: " + statPlayerLives + "; Wave reached: " + statWaveNum +
              "; Stars earned: " + statStarsAmount + ";");
         Debug.Log("Build version is: " + statBuildVersion);
+        StartCoroutine(GetRequest("https://gideon-smart.ru/tau/logger/rollo.php?"
+           + "build_version=" + UnityWebRequest.EscapeURL(statBuildVersion) 
+           + "&level_num=" + UnityWebRequest.EscapeURL(statLevelNum)
+           + "&level_timer=" + UnityWebRequest.EscapeURL(statLevelTimer)
+           + "&level_result=" + UnityWebRequest.EscapeURL(statLevelResult)
+           + "&player_lives=" + UnityWebRequest.EscapeURL(statPlayerLives)
+           + "&wave_num=" + UnityWebRequest.EscapeURL(statWaveNum)
+           + "&stars_amount=" + UnityWebRequest.EscapeURL(statStarsAmount)));
 #else
         StartCoroutine(GetRequest("https://gideon-smart.ru/tau/logger/rollo.php?"
-            + "&build_version=" + UnityWebRequest.EscapeURL(statBuildVersion) //sends '???'
+            + "build_version=" + UnityWebRequest.EscapeURL(statBuildVersion)
             + "&level_num=" + UnityWebRequest.EscapeURL(statLevelNum)
             + "&level_timer=" + UnityWebRequest.EscapeURL(statLevelTimer)
             + "&level_result=" + UnityWebRequest.EscapeURL(statLevelResult)
@@ -139,7 +147,7 @@ public class DebugManager : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Received: " + uwr.downloadHandler.text);
+            Debug.Log("Received: " + uwr.downloadHandler.text);
         }
     }
 
