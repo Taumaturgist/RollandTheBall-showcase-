@@ -333,6 +333,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void LoadNextLevel()
+    {
+        int nextLevel = levelNumber + 10;
+        PlayerPrefs.SetInt("Level", nextLevel);
+        SceneManager.LoadScene(1);
+    }
     public void QuitToMainMenu()
     {   
         spawnManager.ChangeSpawnActivity();

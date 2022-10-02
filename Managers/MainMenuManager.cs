@@ -29,8 +29,7 @@ public class MainMenuManager : MonoBehaviour
     public Button episode09Button;
     public Button episode10Button;
 
-    private int maxWave;
-    private int maxCampaignLevelNumber;
+    private int maxWave;    
     private GameObject Star1;
     private GameObject Star2;
     private GameObject Star3;
@@ -41,6 +40,7 @@ public class MainMenuManager : MonoBehaviour
     {
         CheckMaxWave();
         CheckMCLN();
+        CheckLastLevel();
         
     }
     
@@ -68,6 +68,19 @@ public class MainMenuManager : MonoBehaviour
     {
         settingsMenu.gameObject.SetActive(false);
         startMenu.gameObject.SetActive(true);
+    }
+    public void LoadLastCampaignLevel()
+    {
+        int maxCampaignLevelNumber = 0;
+        if (PlayerPrefs.HasKey("MCLN"))
+        {
+            maxCampaignLevelNumber = PlayerPrefs.GetInt("MCLN");
+        }
+
+        //crunch to avoid OutOfRange (yes, it's a magic number equal to last level achieved)
+        if (maxCampaignLevelNumber >= 90) maxCampaignLevelNumber = 90;
+        PlayerPrefs.SetInt("Level", 301 + maxCampaignLevelNumber);
+        SceneManager.LoadScene(1);
     }
     
     //-----level start methods (change scene)-----
@@ -133,7 +146,20 @@ public class MainMenuManager : MonoBehaviour
     }
 
     //-----achievements display methods-----
-
+    void CheckLastLevel()
+    {
+        int maxCampaignLevelNumber = 0;
+        Button lastLevelButton = GameObject.Find("LastLevelButton").GetComponent<Button>();
+        if (PlayerPrefs.HasKey("MCLN"))
+        {
+            maxCampaignLevelNumber = PlayerPrefs.GetInt("MCLN");
+        }
+        if (maxCampaignLevelNumber >= 10)
+        {
+            lastLevelButton.interactable = true;
+        }   
+            
+    }
     void CheckMaxWave() //максимально достигнутая волна в Выживании
     {
         if (PlayerPrefs.HasKey("MaxWave"))
@@ -146,7 +172,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("MCLN"))
         {
-            maxCampaignLevelNumber = PlayerPrefs.GetInt("MCLN");
+            int maxCampaignLevelNumber = PlayerPrefs.GetInt("MCLN");
             if (maxCampaignLevelNumber >= 10)
             {
                 episode02Button.image.color = Color.white;

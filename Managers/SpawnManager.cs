@@ -226,7 +226,7 @@ public class SpawnManager : MonoBehaviour
             SpawnSurvival(waveNumber);
             if (waveNumber % 2 == 0) SpawnRandomPowerUp();
             if (waveNumber > maxWave) PlayerPrefs.SetInt("MaxWave", waveNumber);
-            waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
+            waveNumberText.text = ": " + waveNumber;
             waveNumber++;
         }  
         
@@ -237,7 +237,7 @@ public class SpawnManager : MonoBehaviour
         if (spawnIsActive)
         {
             SpawnEnemyWave(waveNumber);
-            waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
+            waveNumberText.text = ": " + waveNumber;
             waveNumber++;            
         }
     }
@@ -248,7 +248,7 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnEnemyWave(waveNumber);
             SpawnFatEnemy();
-            waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
+            waveNumberText.text = ": " + waveNumber;
             waveNumber++;           
         }
     }
@@ -260,7 +260,7 @@ public class SpawnManager : MonoBehaviour
             SpawnEnemyWave(waveNumber * 2);
             SpawnFatEnemy();
             SpawnYellowPowerUp();
-            waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
+            waveNumberText.text = ": " + waveNumber;
             waveNumber++;            
         }
     }
@@ -272,7 +272,7 @@ public class SpawnManager : MonoBehaviour
             SpawnEnemyWave(waveNumber * 2);
             SpawnFatEnemy();
             SpawnYellowPowerUp();
-            waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
+            waveNumberText.text = ": " + waveNumber;
             waveNumber++;            
         }
     }
@@ -296,7 +296,7 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnFatEnemy(waveNumber + 1);
             SpawnRedPowerUp();
-            waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
+            waveNumberText.text = ": " + waveNumber;
             waveNumber++;            
         }
         
@@ -308,7 +308,7 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnBasicFatEnemies(waveNumber);
             SpawnRandomPowerUp();
-            waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
+            waveNumberText.text = ": " + waveNumber;
             if (waveNumber > 1) SendMessage("GameSubScenario361");
             waveNumber++;
         }
@@ -322,7 +322,7 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnTripleEnemy(waveNumber);
             SpawnRandomPowerUp();
-            waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
+            waveNumberText.text = ": " + waveNumber;
             waveNumber++;            
         }
     }
@@ -333,7 +333,7 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnSurvival(waveNumber);
             SpawnRandomPowerUp();
-            waveNumberText.text = "ÂÎËÍÀ: " + waveNumber;
+            waveNumberText.text = ": " + waveNumber;
             if (waveNumber > 1) SendMessage("GameSubScenario381");
             waveNumber++;            
         }

@@ -35,8 +35,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;    
     private FloatingJoystick joystickFloat;
     public Collider playerCollider;
-    private int levelNumber;
-    
+    private int levelNumber; 
 
 
     //Debug - speed test TODO - transfer here
@@ -66,7 +65,7 @@ public class PlayerController : MonoBehaviour
         if (levelNumber == 1)
         {
             livesCounter.gameObject.SetActive(false);
-            livesCounter.text = "∆»«Õ»: " + lives;
+            livesCounter.text = ": " + lives;
         }           
             
     }
@@ -82,7 +81,7 @@ public class PlayerController : MonoBehaviour
         if (playerRb.transform.position.y < -2) Respawn();
         
 
-        if (lives >= 0) livesCounter.text = "∆»«Õ»: " + lives;
+        if (lives >= 0) livesCounter.text = ": " + lives;
 
         powerUpCircle.transform.position = playerRb.transform.position;
         powerUpSplashArea.transform.position = new Vector3(playerRb.transform.position.x, playerRb.transform.position.y - 0.5f, playerRb.transform.position.z);
@@ -130,6 +129,12 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Input.touchCount > 0 && gameManager.isGameActive) StartCoroutine(RemovePlayerTip());
+
+        if (Application.platform == RuntimePlatform.Android && Input.GetKey(KeyCode.Escape))
+        {
+            gameManager.isGameActive = !gameManager.isGameActive;
+            if (!gameManager.isGameActive) gameManager.PauseGame();            
+        }
 
     }
 
