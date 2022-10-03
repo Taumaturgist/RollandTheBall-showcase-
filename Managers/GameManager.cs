@@ -101,8 +101,7 @@ public class GameManager : MonoBehaviour
                 break;
             case 391:
                 GameScenario391();
-                break;
-
+                break;            
         }
     }
     
@@ -334,9 +333,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
     public void LoadNextLevel()
-    {
+    {        
         int nextLevel = levelNumber + 10;
-        PlayerPrefs.SetInt("Level", nextLevel);
+        PlayerPrefs.SetInt("Level", nextLevel);        
         SceneManager.LoadScene(1);
     }
     public void QuitToMainMenu()
@@ -352,203 +351,187 @@ public class GameManager : MonoBehaviour
             levelResult = 1;
             AudioListener.pause = true;
 
-        //tutorial
-        if (levelNumber == 1)
+        switch (levelNumber)
         {
-            victoryText.text = "Поздравляю с победой в первом бою!" + "\n" + "\n" +
+            case 1:
+                victoryText.text = "Поздравляю с победой в первом бою!" + "\n" + "\n" +
                 "Теперь приступай к настоящим испытаниям!";
-        }
+                break;
 
-        //campaign episode 1
-        if (levelNumber == 301)
-        {
-            victoryText.text = "ЭПИЗОД 1 пройден!" + "\n" + "\n" +
+            case 301:
+                victoryText.text = "ЭПИЗОД 1 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!" + "\n" +
                 "ЭПИЗОД 2 разблокирован!";
-            
-            maxCampaignLevelNumber = 10;
-            SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                maxCampaignLevelNumber = 10;
+                SetMCLN(maxCampaignLevelNumber);
 
-            if (PlayerPrefs.HasKey("E1S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E1S")) PlayerPrefs.SetInt("E1S", starsAmount);
-            } else PlayerPrefs.SetInt("E1S", starsAmount);
-            Debug.Log("Stars Amount in E1: " + starsAmount);
-        }
+                CheckStars();
 
-        //campaign episode 2
-        if (levelNumber == 311)
-        {
-            victoryText.text = "ЭПИЗОД 2 пройден!" + "\n" + "\n" +
+                if (PlayerPrefs.HasKey("E1S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E1S")) PlayerPrefs.SetInt("E1S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E1S", starsAmount);
+                Debug.Log("Stars Amount in E1: " + starsAmount);
+                break;
+
+            case 311:
+                victoryText.text = "ЭПИЗОД 2 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!" + "\n" +
                 "ЭПИЗОД 3 разблокирован!";
 
-            maxCampaignLevelNumber = 20;
-            SetMCLN(maxCampaignLevelNumber);
+                maxCampaignLevelNumber = 20;
+                SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                CheckStars();
 
-            if (PlayerPrefs.HasKey("E2S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E2S")) PlayerPrefs.SetInt("E2S", starsAmount);
-            }
-            else PlayerPrefs.SetInt("E2S", starsAmount);
-            Debug.Log("Stars Amount in E2: " + starsAmount);
-        }
+                if (PlayerPrefs.HasKey("E2S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E2S")) PlayerPrefs.SetInt("E2S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E2S", starsAmount);
+                Debug.Log("Stars Amount in E2: " + starsAmount);
+                break;
 
-        //campaign episode 3
-        if (levelNumber == 321)
-        {
-            victoryText.text = "ЭПИЗОД 3 пройден!" + "\n" + "\n" +
+            case 321:
+                victoryText.text = "ЭПИЗОД 3 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!";
 
-            maxCampaignLevelNumber = 30;
-            SetMCLN(maxCampaignLevelNumber);
+                maxCampaignLevelNumber = 30;
+                SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                CheckStars();
 
-            if (PlayerPrefs.HasKey("E3S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E3S")) PlayerPrefs.SetInt("E3S", starsAmount);
-            }
-            else PlayerPrefs.SetInt("E3S", starsAmount);
-            Debug.Log("Stars Amount in E3: " + starsAmount);
-        }
+                if (PlayerPrefs.HasKey("E3S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E3S")) PlayerPrefs.SetInt("E3S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E3S", starsAmount);
+                Debug.Log("Stars Amount in E3: " + starsAmount);
+                break;
 
-        //campaign episode 4
-        if (levelNumber == 331)
-        {
-            victoryText.text = "ЭПИЗОД 4 пройден!" + "\n" + "\n" +
+            case 331:
+                victoryText.text = "ЭПИЗОД 4 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!";
 
-            maxCampaignLevelNumber = 40;
-            SetMCLN(maxCampaignLevelNumber);
+                maxCampaignLevelNumber = 40;
+                SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                CheckStars();
 
-            if (PlayerPrefs.HasKey("E4S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E4S")) PlayerPrefs.SetInt("E4S", starsAmount);
-            }
-            else PlayerPrefs.SetInt("E4S", starsAmount);
-            Debug.Log("Stars Amount in E4: " + starsAmount);
-        }
+                if (PlayerPrefs.HasKey("E4S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E4S")) PlayerPrefs.SetInt("E4S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E4S", starsAmount);
+                Debug.Log("Stars Amount in E4: " + starsAmount);
+                break;
 
-        //campaign episode 5
-        if (levelNumber == 341)
-        {
-            victoryText.text = "ЭПИЗОД 5 пройден!" + "\n" + "\n" +
+            case 341:
+                victoryText.text = "ЭПИЗОД 5 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!";
 
-            maxCampaignLevelNumber = 50;
-            SetMCLN(maxCampaignLevelNumber);
+                maxCampaignLevelNumber = 50;
+                SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                CheckStars();
 
-            if (PlayerPrefs.HasKey("E5S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E5S")) PlayerPrefs.SetInt("E5S", starsAmount);
-            }
-            else PlayerPrefs.SetInt("E5S", starsAmount);
-            Debug.Log("Stars Amount in E5: " + starsAmount);
-        }
+                if (PlayerPrefs.HasKey("E5S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E5S")) PlayerPrefs.SetInt("E5S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E5S", starsAmount);
+                Debug.Log("Stars Amount in E5: " + starsAmount);
+                break;
 
-        //campaign episode 6
-        if (levelNumber == 351)
-        {
-            victoryText.text = "ЭПИЗОД 6 пройден!" + "\n" + "\n" +
+            case 351:
+                victoryText.text = "ЭПИЗОД 6 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!";
 
-            maxCampaignLevelNumber = 60;
-            SetMCLN(maxCampaignLevelNumber);
+                maxCampaignLevelNumber = 60;
+                SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                CheckStars();
 
-            if (PlayerPrefs.HasKey("E6S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E6S")) PlayerPrefs.SetInt("E6S", starsAmount);
-            }
-            else PlayerPrefs.SetInt("E6S", starsAmount);
-            Debug.Log("Stars Amount in E6: " + starsAmount);
-        }
+                if (PlayerPrefs.HasKey("E6S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E6S")) PlayerPrefs.SetInt("E6S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E6S", starsAmount);
+                Debug.Log("Stars Amount in E6: " + starsAmount);
+                break;
 
-        //campaign episode 7
-        if (levelNumber == 361)
-        {
-            victoryText.text = "ЭПИЗОД 7 пройден!" + "\n" + "\n" +
+            case 361:
+                victoryText.text = "ЭПИЗОД 7 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!";
 
-            maxCampaignLevelNumber = 70;
-            SetMCLN(maxCampaignLevelNumber);
+                maxCampaignLevelNumber = 70;
+                SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                CheckStars();
 
-            if (PlayerPrefs.HasKey("E7S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E7S")) PlayerPrefs.SetInt("E7S", starsAmount);
-            }
-            else PlayerPrefs.SetInt("E7S", starsAmount);
-            Debug.Log("Stars Amount in E7: " + starsAmount);
-        }
+                if (PlayerPrefs.HasKey("E7S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E7S")) PlayerPrefs.SetInt("E7S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E7S", starsAmount);
+                Debug.Log("Stars Amount in E7: " + starsAmount);
+                break;
 
-        //campaign episode 8
-        if (levelNumber == 371)
-        {
-            victoryText.text = "ЭПИЗОД 8 пройден!" + "\n" + "\n" +
+            case 371:
+                victoryText.text = "ЭПИЗОД 8 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!";
 
-            maxCampaignLevelNumber = 80;
-            SetMCLN(maxCampaignLevelNumber);
+                maxCampaignLevelNumber = 80;
+                SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                CheckStars();
 
-            if (PlayerPrefs.HasKey("E8S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E8S")) PlayerPrefs.SetInt("E8S", starsAmount);
-            }
-            else PlayerPrefs.SetInt("E8S", starsAmount);
-            Debug.Log("Stars Amount in E8: " + starsAmount);
-        }
+                if (PlayerPrefs.HasKey("E8S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E8S")) PlayerPrefs.SetInt("E8S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E8S", starsAmount);
+                Debug.Log("Stars Amount in E8: " + starsAmount);
+                break;
 
-        //campaign episode 9
-        if (levelNumber == 381)
-        {
-            victoryText.text = "ЭПИЗОД 9 пройден!" + "\n" + "\n" +
+            case 381:
+                victoryText.text = "ЭПИЗОД 9 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!";
 
-            maxCampaignLevelNumber = 90;
-            SetMCLN(maxCampaignLevelNumber);
+                maxCampaignLevelNumber = 90;
+                SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                CheckStars();
 
-            if (PlayerPrefs.HasKey("E9S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E9S")) PlayerPrefs.SetInt("E9S", starsAmount);
-            }
-            else PlayerPrefs.SetInt("E9S", starsAmount);
-            Debug.Log("Stars Amount in E9: " + starsAmount);
-        }
+                if (PlayerPrefs.HasKey("E9S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E9S")) PlayerPrefs.SetInt("E9S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E9S", starsAmount);
+                Debug.Log("Stars Amount in E9: " + starsAmount);
+                break;
 
-        //campaign episode 10
-        if (levelNumber == 391)
-        {
-            victoryText.text = "ЭПИЗОД 10 пройден!" + "\n" + "\n" +
+            case 391:
+                victoryText.text = "ЭПИЗОД 10 пройден!" + "\n" + "\n" +
                 "Больше испытаний ждет впереди!";
 
-            maxCampaignLevelNumber = 100;
-            SetMCLN(maxCampaignLevelNumber);            
+                maxCampaignLevelNumber = 100;
+                SetMCLN(maxCampaignLevelNumber);
 
-            CheckStars();
+                CheckStars();
 
-            if (PlayerPrefs.HasKey("E10S"))
-            {
-                if (starsAmount >= PlayerPrefs.GetInt("E10S")) PlayerPrefs.SetInt("E10S", starsAmount);
-            }
-            else PlayerPrefs.SetInt("E10S", starsAmount);
-            Debug.Log("Stars Amount in E10: " + starsAmount);
-        }
+                if (PlayerPrefs.HasKey("E10S"))
+                {
+                    if (starsAmount >= PlayerPrefs.GetInt("E10S")) PlayerPrefs.SetInt("E10S", starsAmount);
+                }
+                else PlayerPrefs.SetInt("E10S", starsAmount);
+                Debug.Log("Stars Amount in E10: " + starsAmount);
+                break;
+
+               
+        }           
 
     }
     void SetMCLN(int MCLN)
